@@ -1,9 +1,6 @@
 package com.dmdev.spring.database.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,6 +23,8 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
+@ToString(exclude = "userChats")
+@EqualsAndHashCode(of = "username")
 @Table(name = "users")
 public class User implements BaseEntity<Long> {
 
