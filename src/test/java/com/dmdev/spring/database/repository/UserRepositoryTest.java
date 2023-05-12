@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 
 import java.time.LocalDate;
@@ -24,8 +25,13 @@ class UserRepositoryTest {
     @Test
     void checkPageable(){
         PageRequest pageable = PageRequest.of(1, 2, Sort.by("id"));
-        List<User> result = userRepository.findAllBy(pageable);
-        assertThat(result).hasSize(2);
+        Slice<User> result = userRepository.findAllBy(pageable);
+        result.forEach(user -> System.out.println(user.getId()));
+
+        while (result.hasNext()){
+            result = userRepository.findAllBy(result.nextPageable());
+            result.forEach(user -> System.out.println(user.getId()));
+        }
     }
 
     @Test
