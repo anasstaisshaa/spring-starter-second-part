@@ -6,6 +6,7 @@ import com.dmdev.spring.integration.annotation.IT;
 import lombok.RequiredArgsConstructor;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
@@ -25,7 +26,7 @@ class UserRepositoryTest {
     @Test
     void checkPageable(){
         PageRequest pageable = PageRequest.of(1, 2, Sort.by("id"));
-        Slice<User> result = userRepository.findAllBy(pageable);
+        Page<User> result = userRepository.findAllBy(pageable);
         result.forEach(user -> System.out.println(user.getId()));
 
         while (result.hasNext()){
