@@ -6,16 +6,45 @@ import com.dmdev.spring.integration.annotation.IT;
 import lombok.RequiredArgsConstructor;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @IT
 @RequiredArgsConstructor
 class UserRepositoryTest {
     private final UserRepository userRepository;
+
+    @Test
+    void checkPageable(){
+        PageRequest pageable = PageRequest.of(1, 2, Sort.by("id"));
+        List<User> result = userRepository.findAllBy(pageable);
+        assertThat(result).hasSize(2);
+    }
+
+    @Test
+    void checkSort(){
+        Sort.TypedSort<User> sortBy = Sort.sort(User.class);
+        Sort sort = sortBy.by(User::getFirstname)
+                .and(sortBy.by(User::getLastname));
+
+        List<User> allUsers = userRepository.findTop3ByBirthDateBefore(LocalDate.now(), sort);
+        assertThat(allUsers).hasSize(3);
+    }
+
+    @Test
+    void checkFirstTop(){
+
+        Optional<User> topUser = userRepository.findTopByOrderByIdDesc();
+        assertTrue(topUser.isPresent());
+        topUser.ifPresent(user -> assertEquals(5L, user.getId()));
+    }
 
     @Test
     void checkUpdate(){
@@ -33,6 +62,6 @@ class UserRepositoryTest {
     @Test
     void checkQueries(){
         List<User> users = userRepository.findAllBy("a", "ov");
-        Assertions.assertThat(users).hasSize(3);
+        assertThat(users).hasSize(3);
     }
 }
