@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @NamedQuery(
         name = "Company.findByName",
@@ -33,6 +34,7 @@ public class Company implements BaseEntity<Integer> {
     @MapKeyColumn(name = "lang")
     @Column(name = "description")
     private Map<String, String> locales = new HashMap<>();
+
 }
 
 
