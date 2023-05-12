@@ -27,11 +27,11 @@ class UserRepositoryTest {
     void checkPageable(){
         PageRequest pageable = PageRequest.of(1, 2, Sort.by("id"));
         Page<User> result = userRepository.findAllBy(pageable);
-        result.forEach(user -> System.out.println(user.getId()));
+        result.forEach(user -> System.out.println(user.getCompany().getName()));
 
         while (result.hasNext()){
             result = userRepository.findAllBy(result.nextPageable());
-            result.forEach(user -> System.out.println(user.getId()));
+            result.forEach(user -> System.out.println(user.getCompany().getName()));
         }
     }
 
