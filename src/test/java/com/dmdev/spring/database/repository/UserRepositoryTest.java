@@ -2,6 +2,8 @@ package com.dmdev.spring.database.repository;
 
 import com.dmdev.spring.database.entity.Role;
 import com.dmdev.spring.database.entity.User;
+import com.dmdev.spring.dto.PersonalInfo;
+import com.dmdev.spring.dto.PersonalInfo2;
 import com.dmdev.spring.integration.annotation.IT;
 import lombok.RequiredArgsConstructor;
 import org.assertj.core.api.Assertions;
@@ -13,6 +15,7 @@ import org.springframework.data.domain.Sort;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
@@ -22,6 +25,12 @@ import static org.junit.jupiter.api.Assertions.*;
 @RequiredArgsConstructor
 class UserRepositoryTest {
     private final UserRepository userRepository;
+
+    @Test
+    void checkProjection(){
+        List<PersonalInfo2> users = userRepository.findAllByCompanyId(1);
+        assertThat(users).hasSize(2);
+    }
 
     @Test
     void checkPageable(){
