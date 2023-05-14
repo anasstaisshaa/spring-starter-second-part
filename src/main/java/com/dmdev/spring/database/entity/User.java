@@ -1,5 +1,6 @@
 package com.dmdev.spring.database.entity;
 
+import com.dmdev.spring.bpp.Auditing;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,7 +19,7 @@ import java.util.List;
 @ToString(exclude = "userChats")
 @EqualsAndHashCode(of = "username")
 @Table(name = "users")
-public class User implements BaseEntity<Long> {
+public class User extends AuditingEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
