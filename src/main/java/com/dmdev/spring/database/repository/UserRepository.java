@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.history.RevisionRepository;
 
 import javax.persistence.LockModeType;
 import javax.persistence.QueryHint;
@@ -16,7 +17,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Long>, FilterUserRepository {
+public interface UserRepository extends JpaRepository<User, Long>,
+        FilterUserRepository,
+        RevisionRepository<User, Long, Integer> {
     @Query("select u from User u " +
             "where u.firstname like %:firstname% and u.lastname like %:lastname%")
     List<User> findAllBy(String firstname, String lastname);

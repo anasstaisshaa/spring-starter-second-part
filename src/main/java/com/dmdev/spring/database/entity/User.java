@@ -2,6 +2,9 @@ package com.dmdev.spring.database.entity;
 
 import com.dmdev.spring.bpp.Auditing;
 import lombok.*;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
+import org.hibernate.envers.RelationTargetAuditMode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -19,6 +22,7 @@ import java.util.List;
 @ToString(exclude = "userChats")
 @EqualsAndHashCode(of = "username")
 @Table(name = "users")
+@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 public class User extends AuditingEntity<Long> {
 
     @Id
@@ -43,6 +47,7 @@ public class User extends AuditingEntity<Long> {
 
     @Builder.Default
     @OneToMany(mappedBy = "user")
+    @NotAudited
     private List<UserChat> userChats = new ArrayList<>();
 }
 
