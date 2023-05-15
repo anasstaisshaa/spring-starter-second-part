@@ -38,5 +38,6 @@ spring:
   jpa:
     properties.hibernate:
       show_sql: true
+      batch_size: 50
       format_sql: true
       hbm2ddl.auto: validate
