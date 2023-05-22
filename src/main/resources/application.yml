@@ -45,3 +45,4 @@ spring:
       batch_size: 50
       format_sql: true
       hbm2ddl.auto: validate
+    open-in-view: false
