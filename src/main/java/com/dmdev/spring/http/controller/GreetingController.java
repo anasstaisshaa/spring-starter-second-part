@@ -1,6 +1,7 @@
 package com.dmdev.spring.http.controller;
 
 import com.dmdev.spring.database.entity.Role;
+import com.dmdev.spring.dto.CompanyReadDto;
 import com.dmdev.spring.dto.UserReadDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,7 +27,9 @@ public class GreetingController {
     public String hello(Model model,
                         HttpServletRequest request,
                         @ModelAttribute("userReadDto") UserReadDto userReadDto){
-        model.addAttribute("user", new UserReadDto(1L, "Ivan"));
+        model.addAttribute("user",
+                new UserReadDto(1L, "Ivan", LocalDate.now(), "Ivan", "Ivanov",
+                        Role.USER, new CompanyReadDto(1, "Apple")));
 
         return "greeting/hello";
     }

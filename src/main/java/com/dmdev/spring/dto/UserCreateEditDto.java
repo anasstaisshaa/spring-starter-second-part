@@ -10,7 +10,7 @@ public class UserCreateEditDto {
     String username;
     LocalDate birthDate;
     String lastname;
-    String firstName;
+    String firstname;
     Role role;
     Integer companyId;
 }
