@@ -34,6 +34,8 @@ spring:
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
+    format:
+      date: iso
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
