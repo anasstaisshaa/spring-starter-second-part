@@ -9,3 +9,6 @@ ADD COLUMN created_by VARCHAR(32);
 
 ALTER TABLE users
 ADD COLUMN modified_by VARCHAR(32);
+
+ALTER TABLE users_aud
+ALTER COLUMN username DROP NOT NULL;
