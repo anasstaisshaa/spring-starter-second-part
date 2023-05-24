@@ -6,6 +6,7 @@ import com.dmdev.spring.dto.UserFilter;
 import com.dmdev.spring.service.CompanyService;
 import com.dmdev.spring.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,12 +17,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
+@Slf4j
 @Controller
 @RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
     private final CompanyService companyService;
+
 
     @GetMapping
     public String findAll(Model model, UserFilter filter){
