@@ -2,6 +2,7 @@ package com.dmdev.spring.dto;
 
 import com.dmdev.spring.database.entity.Role;
 import lombok.Value;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -26,4 +27,6 @@ public class UserCreateEditDto {
     Role role;
 
     Integer companyId;
+
+    MultipartFile image;
 }
