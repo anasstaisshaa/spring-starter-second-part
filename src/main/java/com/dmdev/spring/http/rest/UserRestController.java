@@ -31,8 +31,13 @@ public class UserRestController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UserReadDto> findAll(UserFilter filter, Pageable pageable){
-        List<UserReadDto> result = userService.findAll(filter);
-        return result;
+        return userService.findAll(filter);
+    }
+
+    @GetMapping(value = "/{id}/avatar", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public byte[] findAvatar(@PathVariable("id") Long id){
+        return userService.findAvatar(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/{id}")
