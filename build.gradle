@@ -27,6 +27,7 @@ dependencies {
     implementation 'org.postgresql:postgresql'
     implementation 'org.springframework.data:spring-data-envers:'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     implementation 'com.querydsl:querydsl-jpa:'
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.6'
     annotationProcessor 'com.querydsl:querydsl-apt:'
