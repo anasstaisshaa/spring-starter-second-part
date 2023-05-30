@@ -9,6 +9,7 @@ import com.dmdev.spring.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.mock.web.MockMultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -44,11 +45,13 @@ public class UserServiceIT  {
     void create(){
         UserCreateEditDto userDto = new UserCreateEditDto(
                 "test@gmail.com",
+                "test",
                 LocalDate.now(),
                 "test",
                 "test",
                 Role.ADMIN,
-                COMPANY_1
+                COMPANY_1,
+                new MockMultipartFile("test", new byte[0])
         );
         UserReadDto actualResult = userService.create(userDto);
         assertEquals(userDto.getUsername(), actualResult.getUsername());
@@ -63,11 +66,13 @@ public class UserServiceIT  {
     void update(){
         UserCreateEditDto userDto = new UserCreateEditDto(
                 "test@gmail.com",
+                "test",
                 LocalDate.now(),
                 "test",
                 "test",
                 Role.ADMIN,
-                COMPANY_1
+                COMPANY_1,
+                new MockMultipartFile("test", new byte[0])
         );
         Optional<UserReadDto> actualResult = userService.update(USER_1, userDto);
         assertTrue(actualResult.isPresent());

@@ -6,6 +6,7 @@ import com.dmdev.spring.integration.annotation.IT;
 import com.dmdev.spring.service.CompanyService;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.test.context.support.WithMockUser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
