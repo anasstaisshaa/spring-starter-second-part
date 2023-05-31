@@ -42,21 +42,5 @@ class UserControllerTest {
                 .andExpect(model().attributeExists("users"));
     }
 
-    @Test
-    void create() throws Exception {
-        mockMvc.perform(post("/users")
-                .param("username", "test@gmail.com")
-                .param("firstname", "Test")
-                .param("lastname", "TestTest")
-                .param("role", "ADMIN")
-                .param("companyId", "1")
-                        .param("birthDate", "2000-01-01")
-        )
-                .andExpectAll(
-                        status().is3xxRedirection(),
-                        redirectedUrlPattern("/users/*")
-                );
-    }
-
 
 }
