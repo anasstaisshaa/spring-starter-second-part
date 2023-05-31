@@ -10,6 +10,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.history.RevisionRepository;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.LockModeType;
 import javax.persistence.QueryHint;
@@ -52,4 +53,6 @@ public interface UserRepository extends JpaRepository<User, Long>,
             "FROM users WHERE company_id = :companyId",
             nativeQuery = true)
     List<PersonalInfo2> findAllByCompanyId(Integer companyId);
+
+    Optional<User> findByUsername(String username);
 }
