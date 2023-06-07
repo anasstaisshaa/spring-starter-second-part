@@ -16,7 +16,6 @@ public class FirstAspect {
 
 
     @Pointcut("this(org.springframework.data.repository.Repository))")
-//    @Pointcut("target(org.springframework.data.repository.Repository))")
     public void isRepositoryLayer(){
     }
 
