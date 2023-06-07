@@ -2,6 +2,7 @@ package com.dmdev.spring.aop;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,6 +73,23 @@ public class FirstAspect {
     public void addLoggingAfterFinally(Object service){
         log.info("after (finally) - invoked findById method in class {}", service);
     }
+
+    @Around(value = "anyFindByIdServiceMethod() && target(service) && args(id)", argNames = "proceedingJoinPoint,service,id")
+    public Object addLoggingAround(ProceedingJoinPoint proceedingJoinPoint, Object service, Object id) throws Throwable {
+        log.info("AROUND invoked findById method in class {}, with id {}", service, id);
+
+        try{
+            Object result = proceedingJoinPoint.proceed();
+            log.info("AROUND after returning - invoked findById method in class {}, result {}", service, result);
+            return result;
+        } catch (Throwable ex){
+            log.info("AROUND after throwing - invoked findById method in class {}, exception {}: {}", service, ex.getClass(), ex.getMessage());
+            throw ex;
+        } finally {
+            log.info("AROUND after (finally) - invoked findById method in class {}", service);
+        }
+    }
+
 
 
 }
